@@ -1,59 +1,52 @@
 ﻿using System;
 
-namespace Lab1
+namespace lab1v19
 {
-    class Car
+    class Weather
     {
-        private string _brand;
-        private string _model;
-        private int _year;
+        private string city;
+        private string date;
 
-        public string Brand
+        public double Temperature { get; set; }
+
+        public string City
         {
-            get { return _brand; }
-            set { _brand = value; }
+            get { return city; }
+            set { city = value; }
         }
 
-        public string Model
+        public string Date
         {
-            get { return _model; }
-            set { _model = value; }
+            get { return date; }
+            set { date = value; }
         }
 
-        public int Year
+        public Weather(string city, string date, double temperature)
         {
-            get { return _year; }
-            set
-            {
-                if (value >= 1886 && value <= 2026)
-                {
-                    _year = value;
-                }
-            }
+            this.city = city;
+            this.date = date;
+            Temperature = temperature;
         }
 
-        public Car(string brand, string model, int year)
+        public void PrintForecast()
         {
-            _brand = brand;
-            _model = model;
-            _year = year;
-        }
-
-        public void Drive()
-        {
-            Console.WriteLine($"Автомобіль {_brand} {_model} ({_year} року) вирушив у дорогу.");
+            Console.WriteLine($"Прогноз погоди для м. {city} на {date}: температура {Temperature}°C");
         }
     }
 
-    class Cars
+    class Program
     {
         static void Main(string[] args)
         {
-            Car car1 = new Car("BMW", "M5", 2021);
-            car1.Drive();
+            Console.WriteLine("=== Лабораторна робота №1 | Студент: Нюкін (Варіант 19) ===\n");
 
-            Car car2 = new Car("Audi", "RS6", 2022);
-            car2.Drive();
+            Weather forecast1 = new Weather("Рівне", "09.09.2026", 19.5);
+            Weather forecast2 = new Weather("Київ", "09.09.2026", 22.0);
+            Weather forecast3 = new Weather("Львів", "09.09.2026", 17.8);
+
+            forecast1.PrintForecast();
+            forecast2.PrintForecast();
+            forecast3.PrintForecast();
         }
     }
 }
