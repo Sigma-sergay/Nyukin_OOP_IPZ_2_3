@@ -1,0 +1,29 @@
+=== Лабораторна 13, варіант 19: обробка даних користувача ===
+
+--- UpdateProfile / GetProfile: власні винятки + try-catch ---
+[OK]   Коректне оновлення: профіль #1 оновлено
+[FAIL] Порожнє ім'я: InvalidUserDataException (Field = UserName, Value = '')
+       Поле 'UserName' має невалідне значення '': 3–30 символів, починається з літери, лише літери, цифри, '_', '.', '-'
+[FAIL] Email без домену: InvalidUserDataException (Field = Email, Value = 'olena@example')
+       Поле 'Email' має невалідне значення 'olena@example': не відповідає формату name@domain.tld
+[FAIL] Вік 7: InvalidUserDataException (Field = Age, Value = '7')
+       Поле 'Age' має невалідне значення '7': допустимий вік 14–120
+[FAIL] Телефон не в форматі: InvalidUserDataException (Field = Phone, Value = '0933334455')
+       Поле 'Phone' має невалідне значення '0933334455': очікується формат +380XXXXXXXXX
+[FAIL] Неіснуючий користувач: UserNotFoundException (UserId = 42) — Користувача з Id = 42 не знайдено.
+
+--- ChangeEmail: Result<bool> через IsSuccess / Error ---
+[OK]   user 1 → serhii.n@example.com: email змінено (Value = True)
+[FAIL] user 2 → maksym@example.com: Email 'maksym@example.com' вже використовується користувачем 'maksym'.
+[FAIL] user 3 → maksym@example.com: Новий email збігається з поточним.
+[FAIL] user 3 → not-an-email: Email 'not-an-email' має невірний формат.
+[FAIL] user 99 → someone@example.com: Користувача з Id = 99 не знайдено.
+
+--- Result<T>.Failure(Exception) ---
+Помилка: UserNotFoundException: Користувача з Id = 7 не знайдено.
+Знайдено: #1 serhii_n, 18 р., serhii.n@example.com, +380671112233
+
+--- Підсумковий стан профілів ---
+#1 serhii_n, 18 р., serhii.n@example.com, +380671112233
+#2 olena, 19 р., olena@example.com, +380502223344
+#3 maksym, 20 р., maksym@example.com, +380933334455
